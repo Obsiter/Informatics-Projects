@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 
 
-class Milijunas:
+class Milionare:
     def __init__(self, parent):
         self.bal = 0
         self.correct = 0
@@ -13,7 +13,7 @@ class Milijunas:
 
 
 
-        #Kreira pitanja
+        #Create your questions in a list object [question, answer(correct), random answer, random answer, random answer]
     def create_question(self):
         questions = [
             ["s koliko zemalja hrvatska graniči?", "6", "5", "8", "4"],
@@ -45,7 +45,7 @@ class Milijunas:
         fakeIII = data[0]
         return(question, fake, fakeI, fakeII, fakeIII)
 
-        #kreira widgete
+        #Create widgets
     def create_layout(self, question, fake, fakeI, fakeII, fakeIII):
         question_label = tk.Label(root, text = question, width=50)
         button_one = tk.Button(root, text = fake, width=25, command = lambda: self.check_answer(self.firstAnswer))
@@ -58,11 +58,11 @@ class Milijunas:
     def setup(self, score=False):
         self.restart_label.grid_remove()
         if not score:
-            self.score = tk.Label(root, text = "Novac: " + str(self.bal), width = 50)
+            self.score = tk.Label(root, text = "Money: " + str(self.bal), width = 50)
             self.score.grid(row=0, column=0, columnspan=2)
         else:
-            self.score.config(text="Novac: " + str(self.bal), width = 50)
-            #kreacija svih tipki
+            self.score.config(text="Money: " + str(self.bal), width = 50)
+            #create all the buttons
         self.question, self.firstAnswer, self.secondAnswer, self.thirdAnswer, self.fourthAnswer = self.create_question()
         self.question_label, self.firstAnswer_label, self.secondAnswer_label, self.thirdAnswer_label, self.fourthAnswer_label = self.create_layout(self.question, self.firstAnswer, self.secondAnswer, self.thirdAnswer, self.fourthAnswer)
         self.question_label.grid(row=1, column=0, columnspan=2)
@@ -77,7 +77,7 @@ class Milijunas:
             self.bal = self.rewards[self.correct]
             if self.bal != 1000000:
                 self.score.config(text="Novac: " + str(self.bal), width = 50)
-                #Uklanja pitanje i odgovore
+                #remove questions and answers
                 self.question_label.grid_remove()
                 self.firstAnswer_label.grid_remove()
                 self.secondAnswer_label.grid_remove()
@@ -85,25 +85,25 @@ class Milijunas:
                 self.fourthAnswer_label.grid_remove()
                 self.setup(self.score)
             else:
-                self.score.config(text="Novac: " + str(self.bal), width = 50)
-                #Uklanja pitanje i odgovore
+                self.score.config(text="Money: " + str(self.bal), width = 50)
+                #remove questions and answers
                 self.question_label.grid_remove()
                 self.firstAnswer_label.grid_remove()
                 self.secondAnswer_label.grid_remove()
                 self.thirdAnswer_label.grid_remove()
                 self.fourthAnswer_label.grid_remove()
-                self.win = tk.Label(root, text = "POBJEDILI STE!!!", width=50)
+                self.win = tk.Label(root, text = "YOU WON!!!", width=50)
                 self.win.grid(row=1, column=0, columnspan=2)
 
         else:
-            #dodavanje tipke za ponovni pokušaj
+            #adding retry button
             self.score.config(text="Izgubili ste.", width = 50)
-            self.restart_label = tk.Button(root, text = "Pokušaj ponovno!", width = 50, command = lambda: self.setup(self.score))
+            self.restart_label = tk.Button(root, text = "Try again!", width = 50, command = lambda: self.setup(self.score))
             self.restart_label.grid(row=1, column=0, columnspan=2)
             self.bal = 0
             self.score = 0
             self.correct = 0
-            #Uklanja pitanje i odgovore
+            #remove questions and answers
             self.question_label.grid_remove()
             self.firstAnswer_label.grid_remove()
             self.secondAnswer_label.grid_remove()
@@ -116,6 +116,6 @@ class Milijunas:
 
 
 root = tk.Tk()
-root.title("Milijunas")
-milijunas = Milijunas(root)
+root.title("Milionare")
+milijunas = Milionare(root)
 root.mainloop()
